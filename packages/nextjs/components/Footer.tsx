@@ -57,7 +57,7 @@ export const Footer = () => {
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="text-center">
               <a
-                href="https://github.com/scaffold-eth/se-2"
+                href="https://github.com/programmer-ke/ipt-frontend"
                 target="_blank"
                 rel="noreferrer"
                 className="link"
@@ -83,12 +83,12 @@ export const Footer = () => {
             <span>·</span>
             <div className="text-center">
               <a
-                href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA"
+                href="https://github.com/programmer-ke/interplanetary-token"
                 target="_blank"
                 rel="noreferrer"
                 className="link"
               >
-                Support
+                Contract
               </a>
             </div>
           </div>
