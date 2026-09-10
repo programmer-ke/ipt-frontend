@@ -1,8 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Address, AddressInput, Balance, EtherInput } from "@scaffold-ui/components";
-import { Address as AddressType, createWalletClient, http, parseEther } from "viem";
+import {
+  Address,
+  AddressInput,
+  Balance,
+  EtherInput,
+} from "@scaffold-ui/components";
+import {
+  Address as AddressType,
+  createWalletClient,
+  http,
+  parseEther,
+} from "viem";
 import { hardhat } from "viem/chains";
 import { useAccount } from "wagmi";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
@@ -39,13 +49,25 @@ export const Faucet = () => {
       } catch (error) {
         notification.error(
           <>
-            <p className="font-bold mt-0 mb-1">Cannot connect to local provider</p>
+            <p className="font-bold mt-0 mb-1">
+              Cannot connect to local provider
+            </p>
             <p className="m-0">
-              - Did you forget to run <code className="italic bg-base-300 text-base font-bold">yarn chain</code> ?
+              - Did you forget to run{" "}
+              <code className="italic bg-base-300 text-base font-bold">
+                yarn chain
+              </code>{" "}
+              ?
             </p>
             <p className="mt-1 break-normal">
-              - Or you can change <code className="italic bg-base-300 text-base font-bold">targetNetwork</code> in{" "}
-              <code className="italic bg-base-300 text-base font-bold">scaffold.config.ts</code>
+              - Or you can change{" "}
+              <code className="italic bg-base-300 text-base font-bold">
+                targetNetwork
+              </code>{" "}
+              in{" "}
+              <code className="italic bg-base-300 text-base font-bold">
+                scaffold.config.ts
+              </code>
             </p>
           </>,
         );
@@ -82,7 +104,10 @@ export const Faucet = () => {
 
   return (
     <div>
-      <label htmlFor="faucet-modal" className="btn btn-primary btn-sm font-normal gap-1">
+      <label
+        htmlFor="faucet-modal"
+        className="btn btn-primary btn-sm font-normal gap-1"
+      >
         <BanknotesIcon className="h-4 w-4" />
         <span>Faucet</span>
       </label>
@@ -92,14 +117,21 @@ export const Faucet = () => {
           {/* dummy input to capture event onclick on modal box */}
           <input className="h-0 w-0 absolute top-0 left-0" />
           <h3 className="text-xl font-bold mb-3">Local Faucet</h3>
-          <label htmlFor="faucet-modal" className="btn btn-ghost btn-sm absolute right-3 top-3">
+          <label
+            htmlFor="faucet-modal"
+            className="btn btn-ghost btn-sm absolute right-3 top-3"
+          >
             ✕
           </label>
           <div className="space-y-3">
             <div className="flex space-x-4">
               <div>
                 <span className="text-sm font-bold">From:</span>
-                <Address address={faucetAddress} onlyEnsOrAddress chain={targetNetwork} />
+                <Address
+                  address={faucetAddress}
+                  onlyEnsOrAddress
+                  chain={targetNetwork}
+                />
               </div>
               <div>
                 <span className="text-sm font-bold pl-3">Available:</span>
@@ -117,7 +149,11 @@ export const Faucet = () => {
                 onValueChange={({ valueInEth }) => setSendValue(valueInEth)}
                 style={{ width: "100%" }}
               />
-              <button className="h-10 btn btn-primary btn-sm px-2" onClick={sendETH} disabled={loading}>
+              <button
+                className="h-10 btn btn-primary btn-sm px-2"
+                onClick={sendETH}
+                disabled={loading}
+              >
                 {!loading ? (
                   <BanknotesIcon className="h-6 w-6" />
                 ) : (

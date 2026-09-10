@@ -3,7 +3,12 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Abi, AbiEvent, ExtractAbiEventNames } from "abitype";
 import { BlockNumber, GetLogsParameters } from "viem";
 import { hardhat } from "viem/chains";
-import { Config, UsePublicClientReturnType, useBlockNumber, usePublicClient } from "wagmi";
+import {
+  Config,
+  UsePublicClientReturnType,
+  useBlockNumber,
+  usePublicClient,
+} from "wagmi";
 import { useSelectedNetwork } from "~~/hooks/scaffold-eth";
 import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import { AllowedChainIds } from "~~/utils/scaffold-eth";
@@ -16,7 +21,13 @@ import {
 } from "~~/utils/scaffold-eth/contract";
 
 const getEvents = async (
-  getLogsParams: GetLogsParameters<AbiEvent | undefined, AbiEvent[] | undefined, boolean, BlockNumber, BlockNumber>,
+  getLogsParams: GetLogsParameters<
+    AbiEvent | undefined,
+    AbiEvent[] | undefined,
+    boolean,
+    BlockNumber,
+    BlockNumber
+  >,
   publicClient?: UsePublicClientReturnType<Config, number>,
   Options?: {
     blockData?: boolean;
@@ -38,14 +49,18 @@ const getEvents = async (
       return {
         ...log,
         blockData:
-          Options?.blockData && log.blockHash ? await publicClient?.getBlock({ blockHash: log.blockHash }) : null,
+          Options?.blockData && log.blockHash
+            ? await publicClient?.getBlock({ blockHash: log.blockHash })
+            : null,
         transactionData:
           Options?.transactionData && log.transactionHash
             ? await publicClient?.getTransaction({ hash: log.transactionHash })
             : null,
         receiptData:
           Options?.receiptData && log.transactionHash
-            ? await publicClient?.getTransactionReceipt({ hash: log.transactionHash })
+            ? await publicClient?.getTransactionReceipt({
+                hash: log.transactionHash,
+              })
             : null,
       };
     }),
@@ -93,7 +108,13 @@ export const useScaffoldEventHistory = <
   watch,
   enabled = true,
   blocksBatchSize = 500,
-}: UseScaffoldEventHistoryConfig<TContractName, TEventName, TBlockData, TTransactionData, TReceiptData>) => {
+}: UseScaffoldEventHistoryConfig<
+  TContractName,
+  TEventName,
+  TBlockData,
+  TTransactionData,
+  TReceiptData
+>) => {
   const selectedNetwork = useSelectedNetwork(chainId);
 
   // Runtime warning for non-local chains
@@ -112,7 +133,10 @@ export const useScaffoldEventHistory = <
   const [lastFetchedBlock, setLastFetchedBlock] = useState<bigint | null>(null);
   const [isPollingActive, setIsPollingActive] = useState(false);
 
-  const { data: blockNumber } = useBlockNumber({ watch: watch, chainId: selectedNetwork.id });
+  const { data: blockNumber } = useBlockNumber({
+    watch: watch,
+    chainId: selectedNetwork.id,
+  });
 
   const { data: deployedContractData } = useDeployedContractInfo({
     contractName,
@@ -121,9 +145,12 @@ export const useScaffoldEventHistory = <
 
   const event =
     deployedContractData &&
-    ((deployedContractData.abi as Abi).find(part => part.type === "event" && part.name === eventName) as AbiEvent);
+    ((deployedContractData.abi as Abi).find(
+      part => part.type === "event" && part.name === eventName,
+    ) as AbiEvent);
 
-  const isContractAddressAndClientReady = Boolean(deployedContractData?.address) && Boolean(publicClient);
+  const isContractAddressAndClientReady =
+    Boolean(deployedContractData?.address) && Boolean(publicClient);
 
   const fromBlockValue =
     fromBlock !== undefined
@@ -154,7 +181,8 @@ export const useScaffoldEventHistory = <
       // Calculate the toBlock for this batch
       let batchToBlock = toBlock;
       const batchEndBlock = pageParam + BigInt(blocksBatchSize) - 1n;
-      const maxBlock = toBlock || (blockNumber ? BigInt(blockNumber) : undefined);
+      const maxBlock =
+        toBlock || (blockNumber ? BigInt(blockNumber) : undefined);
       if (maxBlock) {
         batchToBlock = batchEndBlock < maxBlock ? batchEndBlock : maxBlock;
       }
@@ -190,13 +218,14 @@ export const useScaffoldEventHistory = <
       return nextBlock;
     },
     select: data => {
-      const events = data.pages.flat() as unknown as UseScaffoldEventHistoryData<
-        TContractName,
-        TEventName,
-        TBlockData,
-        TTransactionData,
-        TReceiptData
-      >;
+      const events =
+        data.pages.flat() as unknown as UseScaffoldEventHistoryData<
+          TContractName,
+          TEventName,
+          TBlockData,
+          TTransactionData,
+          TReceiptData
+        >;
 
       return {
         pages: events?.reverse(),
@@ -214,9 +243,19 @@ export const useScaffoldEventHistory = <
 
   // Poll for new events when watch mode is enabled
   useQuery({
-    queryKey: ["liveEvents", contractName, eventName, blockNumber?.toString(), lastFetchedBlock?.toString()],
+    queryKey: [
+      "liveEvents",
+      contractName,
+      eventName,
+      blockNumber?.toString(),
+      lastFetchedBlock?.toString(),
+    ],
     enabled: Boolean(
-      watch && enabled && isContractAddressAndClientReady && blockNumber && (shouldStartPolling() || isPollingActive),
+      watch &&
+      enabled &&
+      isContractAddressAndClientReady &&
+      blockNumber &&
+      (shouldStartPolling() || isPollingActive),
     ),
     queryFn: async () => {
       if (!isContractAddressAndClientReady || !blockNumber) return null;
@@ -268,7 +307,10 @@ export const useScaffoldEventHistory = <
 
   // Combine historical data from infinite query with live events from watch hook
   const historicalEvents = query.data?.pages || [];
-  const allEvents = [...liveEvents, ...historicalEvents] as typeof historicalEvents;
+  const allEvents = [
+    ...liveEvents,
+    ...historicalEvents,
+  ] as typeof historicalEvents;
 
   // remove duplicates
   const seenEvents = new Set<string>();

@@ -17,7 +17,9 @@ const ABI = parseAbi([
   "function token1() external view returns (address)",
 ]);
 
-export const fetchPriceFromUniswap = async (targetNetwork: ChainWithAttributes): Promise<number> => {
+export const fetchPriceFromUniswap = async (
+  targetNetwork: ChainWithAttributes,
+): Promise<number> => {
   if (
     targetNetwork.nativeCurrency.symbol !== "ETH" &&
     targetNetwork.nativeCurrency.symbol !== "SEP" &&
@@ -29,7 +31,8 @@ export const fetchPriceFromUniswap = async (targetNetwork: ChainWithAttributes):
     const DAI = new Token(1, "0x6B175474E89094C44Da98b954EedeAC495271d0F", 18);
     const TOKEN = new Token(
       1,
-      targetNetwork.nativeCurrencyTokenAddress || "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      targetNetwork.nativeCurrencyTokenAddress ||
+        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
       18,
     );
     const pairAddress = Pair.getAddress(TOKEN, DAI) as Address;
@@ -53,8 +56,12 @@ export const fetchPriceFromUniswap = async (targetNetwork: ChainWithAttributes):
       ...wagmiConfig,
       functionName: "token1",
     });
-    const token0 = [TOKEN, DAI].find(token => token.address === token0Address) as Token;
-    const token1 = [TOKEN, DAI].find(token => token.address === token1Address) as Token;
+    const token0 = [TOKEN, DAI].find(
+      token => token.address === token0Address,
+    ) as Token;
+    const token1 = [TOKEN, DAI].find(
+      token => token.address === token1Address,
+    ) as Token;
     const pair = new Pair(
       CurrencyAmount.fromRawAmount(token0, reserves[0].toString()),
       CurrencyAmount.fromRawAmount(token1, reserves[1].toString()),

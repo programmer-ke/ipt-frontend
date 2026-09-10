@@ -4,7 +4,11 @@ import { useWatchContractEvent } from "wagmi";
 import { useSelectedNetwork } from "~~/hooks/scaffold-eth";
 import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 import { AllowedChainIds } from "~~/utils/scaffold-eth";
-import { ContractAbi, ContractName, UseScaffoldEventConfig } from "~~/utils/scaffold-eth/contract";
+import {
+  ContractAbi,
+  ContractName,
+  UseScaffoldEventConfig,
+} from "~~/utils/scaffold-eth/contract";
 
 /**
  * Wrapper around wagmi's useEventSubscriber hook which automatically loads (by name) the contract ABI and

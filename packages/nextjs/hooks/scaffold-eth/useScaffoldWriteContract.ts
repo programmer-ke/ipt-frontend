@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { MutateOptions } from "@tanstack/react-query";
 import { Abi, ExtractAbiFunctionNames } from "abitype";
-import { Config, UseWriteContractParameters, useAccount, useConfig, useWriteContract } from "wagmi";
+import {
+  Config,
+  UseWriteContractParameters,
+  useAccount,
+  useConfig,
+  useWriteContract,
+} from "wagmi";
 import { WriteContractErrorType, WriteContractReturnType } from "wagmi/actions";
 import { WriteContractVariables } from "wagmi/query";
 import { useSelectedNetwork } from "~~/hooks/scaffold-eth";
@@ -22,14 +28,25 @@ type ScaffoldWriteContractReturnType<TContractName extends ContractName> = Omit<
 > & {
   isMining: boolean;
   writeContractAsync: <
-    TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, "nonpayable" | "payable">,
+    TFunctionName extends ExtractAbiFunctionNames<
+      ContractAbi<TContractName>,
+      "nonpayable" | "payable"
+    >,
   >(
     variables: ScaffoldWriteContractVariables<TContractName, TFunctionName>,
     options?: ScaffoldWriteContractOptions,
   ) => Promise<WriteContractReturnType | undefined>;
-  writeContract: <TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, "nonpayable" | "payable">>(
+  writeContract: <
+    TFunctionName extends ExtractAbiFunctionNames<
+      ContractAbi<TContractName>,
+      "nonpayable" | "payable"
+    >,
+  >(
     variables: ScaffoldWriteContractVariables<TContractName, TFunctionName>,
-    options?: Omit<ScaffoldWriteContractOptions, "onBlockConfirmation" | "blockConfirmations">,
+    options?: Omit<
+      ScaffoldWriteContractOptions,
+      "onBlockConfirmation" | "blockConfirmations"
+    >,
   ) => void;
 };
 
@@ -59,7 +76,11 @@ export function useScaffoldWriteContract<TContractName extends ContractName>(
     typeof configOrName === "string"
       ? { contractName: configOrName, writeContractParams, chainId: undefined }
       : (configOrName as UseScaffoldWriteConfig<TContractName>);
-  const { contractName, chainId, writeContractParams: finalWriteContractParams } = finalConfig;
+  const {
+    contractName,
+    chainId,
+    writeContractParams: finalWriteContractParams,
+  } = finalConfig;
 
   const wagmiConfig = useConfig();
 
@@ -85,13 +106,18 @@ export function useScaffoldWriteContract<TContractName extends ContractName>(
   });
 
   const sendContractWriteAsyncTx = async <
-    TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, "nonpayable" | "payable">,
+    TFunctionName extends ExtractAbiFunctionNames<
+      ContractAbi<TContractName>,
+      "nonpayable" | "payable"
+    >,
   >(
     variables: ScaffoldWriteContractVariables<TContractName, TFunctionName>,
     options?: ScaffoldWriteContractOptions,
   ) => {
     if (!deployedContractData) {
-      notification.error("Target Contract is not deployed, did you forget to run `yarn deploy`?");
+      notification.error(
+        "Target Contract is not deployed, did you forget to run `yarn deploy`?",
+      );
       return;
     }
 
@@ -101,13 +127,16 @@ export function useScaffoldWriteContract<TContractName extends ContractName>(
     }
 
     if (accountChain?.id !== selectedNetwork.id) {
-      notification.error(`Wallet is connected to the wrong network. Please switch to ${selectedNetwork.name}`);
+      notification.error(
+        `Wallet is connected to the wrong network. Please switch to ${selectedNetwork.name}`,
+      );
       return;
     }
 
     try {
       setIsMining(true);
-      const { blockConfirmations, onBlockConfirmation, ...mutateOptions } = options || {};
+      const { blockConfirmations, onBlockConfirmation, ...mutateOptions } =
+        options || {};
 
       const writeContractObject = {
         abi: deployedContractData.abi as Abi,
@@ -135,7 +164,10 @@ export function useScaffoldWriteContract<TContractName extends ContractName>(
               >
             | undefined,
         );
-      const writeTxResult = await writeTx(makeWriteWithParams, { blockConfirmations, onBlockConfirmation });
+      const writeTxResult = await writeTx(makeWriteWithParams, {
+        blockConfirmations,
+        onBlockConfirmation,
+      });
 
       return writeTxResult;
     } catch (e: any) {
@@ -147,13 +179,21 @@ export function useScaffoldWriteContract<TContractName extends ContractName>(
 
   const sendContractWriteTx = <
     TContractName extends ContractName,
-    TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, "nonpayable" | "payable">,
+    TFunctionName extends ExtractAbiFunctionNames<
+      ContractAbi<TContractName>,
+      "nonpayable" | "payable"
+    >,
   >(
     variables: ScaffoldWriteContractVariables<TContractName, TFunctionName>,
-    options?: Omit<ScaffoldWriteContractOptions, "onBlockConfirmation" | "blockConfirmations">,
+    options?: Omit<
+      ScaffoldWriteContractOptions,
+      "onBlockConfirmation" | "blockConfirmations"
+    >,
   ) => {
     if (!deployedContractData) {
-      notification.error("Target Contract is not deployed, did you forget to run `yarn deploy`?");
+      notification.error(
+        "Target Contract is not deployed, did you forget to run `yarn deploy`?",
+      );
       return;
     }
     if (!accountChain?.id) {
@@ -162,7 +202,9 @@ export function useScaffoldWriteContract<TContractName extends ContractName>(
     }
 
     if (accountChain?.id !== selectedNetwork.id) {
-      notification.error(`Wallet is connected to the wrong network. Please switch to ${selectedNetwork.name}`);
+      notification.error(
+        `Wallet is connected to the wrong network. Please switch to ${selectedNetwork.name}`,
+      );
       return;
     }
 

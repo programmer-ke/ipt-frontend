@@ -11,9 +11,14 @@ type PageProps = {
   params: Promise<{ address: Address }>;
 };
 
-async function fetchByteCodeAndAssembly(buildInfoDirectory: string, contractName: string) {
+async function fetchByteCodeAndAssembly(
+  buildInfoDirectory: string,
+  contractName: string,
+) {
   const contractPath = `project/contracts/${contractName}.sol`;
-  const buildInfoFiles = fs.readdirSync(buildInfoDirectory).filter(f => f.endsWith(".output.json"));
+  const buildInfoFiles = fs
+    .readdirSync(buildInfoDirectory)
+    .filter(f => f.endsWith(".output.json"));
   let bytecode = "";
   let assembly = "";
 
@@ -24,8 +29,12 @@ async function fetchByteCodeAndAssembly(buildInfoDirectory: string, contractName
 
     if (buildInfo.output?.contracts?.[contractPath]) {
       for (const contract in buildInfo.output.contracts[contractPath]) {
-        bytecode = buildInfo.output.contracts[contractPath][contract].evm.bytecode.object;
-        assembly = buildInfo.output.contracts[contractPath][contract].evm.bytecode.opcodes;
+        bytecode =
+          buildInfo.output.contracts[contractPath][contract].evm.bytecode
+            .object;
+        assembly =
+          buildInfo.output.contracts[contractPath][contract].evm.bytecode
+            .opcodes;
         break;
       }
     }
@@ -42,11 +51,21 @@ const getContractData = async (address: Address) => {
   const contracts = deployedContracts as GenericContractsDeclaration | null;
   const chainId = hardhat.id;
 
-  if (!contracts || !contracts[chainId] || Object.keys(contracts[chainId]).length === 0) {
+  if (
+    !contracts ||
+    !contracts[chainId] ||
+    Object.keys(contracts[chainId]).length === 0
+  ) {
     return null;
   }
 
-  const artifactsDirectory = path.join(process.cwd(), "..", "hardhat", "artifacts", "build-info");
+  const artifactsDirectory = path.join(
+    process.cwd(),
+    "..",
+    "hardhat",
+    "artifacts",
+    "build-info",
+  );
 
   if (!fs.existsSync(artifactsDirectory)) {
     throw new Error(`Directory ${artifactsDirectory} not found.`);
@@ -54,7 +73,9 @@ const getContractData = async (address: Address) => {
 
   let matchedContractName = "";
   const deployedContractsOnChain = contracts[chainId];
-  for (const [contractName, contractInfo] of Object.entries(deployedContractsOnChain)) {
+  for (const [contractName, contractInfo] of Object.entries(
+    deployedContractsOnChain,
+  )) {
     if (contractInfo.address.toLowerCase() === address.toLowerCase()) {
       matchedContractName = contractName;
       break;
@@ -66,7 +87,10 @@ const getContractData = async (address: Address) => {
     return null;
   }
 
-  const { bytecode, assembly } = await fetchByteCodeAndAssembly(artifactsDirectory, matchedContractName);
+  const { bytecode, assembly } = await fetchByteCodeAndAssembly(
+    artifactsDirectory,
+    matchedContractName,
+  );
 
   return { bytecode, assembly };
 };
@@ -82,7 +106,8 @@ const AddressPage = async (props: PageProps) => {
 
   if (isZeroAddress(address)) return null;
 
-  const contractData: { bytecode: string; assembly: string } | null = await getContractData(address);
+  const contractData: { bytecode: string; assembly: string } | null =
+    await getContractData(address);
   return <AddressComponent address={address} contractData={contractData} />;
 };
 

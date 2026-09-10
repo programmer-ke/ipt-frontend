@@ -99,7 +99,9 @@ const externalContracts = {
         {
           type: "function",
           name: "grantMintAndBurnRole",
-          inputs: [{ name: "_account", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "_account", type: "address", internalType: "address" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -155,13 +157,23 @@ const externalContracts = {
           outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
           stateMutability: "view",
         },
-        { type: "function", name: "renounceOwnership", inputs: [], outputs: [], stateMutability: "nonpayable" },
+        {
+          type: "function",
+          name: "renounceOwnership",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
         {
           type: "function",
           name: "renounceRole",
           inputs: [
             { name: "role", type: "bytes32", internalType: "bytes32" },
-            { name: "callerConfirmation", type: "address", internalType: "address" },
+            {
+              name: "callerConfirmation",
+              type: "address",
+              internalType: "address",
+            },
           ],
           outputs: [],
           stateMutability: "nonpayable",
@@ -179,14 +191,22 @@ const externalContracts = {
         {
           type: "function",
           name: "setInterestRate",
-          inputs: [{ name: "_newInterestRate", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "_newInterestRate",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "supportsInterface",
-          inputs: [{ name: "interfaceId", type: "bytes4", internalType: "bytes4" }],
+          inputs: [
+            { name: "interfaceId", type: "bytes4", internalType: "bytes4" },
+          ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
           stateMutability: "view",
         },
@@ -228,7 +248,9 @@ const externalContracts = {
         {
           type: "function",
           name: "transferOwnership",
-          inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "newOwner", type: "address", internalType: "address" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -236,24 +258,56 @@ const externalContracts = {
           type: "event",
           name: "Approval",
           inputs: [
-            { name: "owner", type: "address", indexed: true, internalType: "address" },
-            { name: "spender", type: "address", indexed: true, internalType: "address" },
-            { name: "value", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "owner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "spender",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "value",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
         {
           type: "event",
           name: "InterestRateSet",
-          inputs: [{ name: "newInterestRate", type: "uint256", indexed: false, internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newInterestRate",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "OwnershipTransferred",
           inputs: [
-            { name: "previousOwner", type: "address", indexed: true, internalType: "address" },
-            { name: "newOwner", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "previousOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "newOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -261,9 +315,24 @@ const externalContracts = {
           type: "event",
           name: "RoleAdminChanged",
           inputs: [
-            { name: "role", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "previousAdminRole", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "newAdminRole", type: "bytes32", indexed: true, internalType: "bytes32" },
+            {
+              name: "role",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "previousAdminRole",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "newAdminRole",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
           ],
           anonymous: false,
         },
@@ -271,9 +340,24 @@ const externalContracts = {
           type: "event",
           name: "RoleGranted",
           inputs: [
-            { name: "role", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "account", type: "address", indexed: true, internalType: "address" },
-            { name: "sender", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "role",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "account",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -281,9 +365,24 @@ const externalContracts = {
           type: "event",
           name: "RoleRevoked",
           inputs: [
-            { name: "role", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "account", type: "address", indexed: true, internalType: "address" },
-            { name: "sender", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "role",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "account",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -291,9 +390,24 @@ const externalContracts = {
           type: "event",
           name: "Transfer",
           inputs: [
-            { name: "from", type: "address", indexed: true, internalType: "address" },
-            { name: "to", type: "address", indexed: true, internalType: "address" },
-            { name: "value", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "value",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -327,22 +441,30 @@ const externalContracts = {
         {
           type: "error",
           name: "ERC20InvalidApprover",
-          inputs: [{ name: "approver", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "approver", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "ERC20InvalidReceiver",
-          inputs: [{ name: "receiver", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "receiver", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "ERC20InvalidSender",
-          inputs: [{ name: "sender", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "sender", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "ERC20InvalidSpender",
-          inputs: [{ name: "spender", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "spender", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
@@ -352,14 +474,24 @@ const externalContracts = {
         {
           type: "error",
           name: "OwnableUnauthorizedAccount",
-          inputs: [{ name: "account", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "account", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "RebaseToken__InterestCanOnlyDecrease",
           inputs: [
-            { name: "oldInterestRate", type: "uint256", internalType: "uint256" },
-            { name: "newInterestRate", type: "uint256", internalType: "uint256" },
+            {
+              name: "oldInterestRate",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "newInterestRate",
+              type: "uint256",
+              internalType: "uint256",
+            },
           ],
         },
       ],
@@ -370,20 +502,38 @@ const externalContracts = {
         {
           type: "constructor",
           inputs: [
-            { name: "_token", type: "address", internalType: "contract IERC20" },
+            {
+              name: "_token",
+              type: "address",
+              internalType: "contract IERC20",
+            },
             { name: "tokenDecimals", type: "uint8", internalType: "uint8" },
-            { name: "_whitelist", type: "address[]", internalType: "address[]" },
+            {
+              name: "_whitelist",
+              type: "address[]",
+              internalType: "address[]",
+            },
             { name: "_rnmProxy", type: "address", internalType: "address" },
             { name: "_router", type: "address", internalType: "address" },
           ],
           stateMutability: "nonpayable",
         },
-        { type: "function", name: "acceptOwnership", inputs: [], outputs: [], stateMutability: "nonpayable" },
+        {
+          type: "function",
+          name: "acceptOwnership",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
         {
           type: "function",
           name: "addRemotePool",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
           outputs: [],
@@ -403,22 +553,42 @@ const externalContracts = {
           type: "function",
           name: "applyChainUpdates",
           inputs: [
-            { name: "remoteChainSelectorsToRemove", type: "uint64[]", internalType: "uint64[]" },
+            {
+              name: "remoteChainSelectorsToRemove",
+              type: "uint64[]",
+              internalType: "uint64[]",
+            },
             {
               name: "chainsToAdd",
               type: "tuple[]",
               internalType: "struct TokenPool.ChainUpdate[]",
               components: [
-                { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
-                { name: "remotePoolAddresses", type: "bytes[]", internalType: "bytes[]" },
-                { name: "remoteTokenAddress", type: "bytes", internalType: "bytes" },
+                {
+                  name: "remoteChainSelector",
+                  type: "uint64",
+                  internalType: "uint64",
+                },
+                {
+                  name: "remotePoolAddresses",
+                  type: "bytes[]",
+                  internalType: "bytes[]",
+                },
+                {
+                  name: "remoteTokenAddress",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
                 {
                   name: "outboundRateLimiterConfig",
                   type: "tuple",
                   internalType: "struct RateLimiter.Config",
                   components: [
                     { name: "isEnabled", type: "bool", internalType: "bool" },
-                    { name: "capacity", type: "uint128", internalType: "uint128" },
+                    {
+                      name: "capacity",
+                      type: "uint128",
+                      internalType: "uint128",
+                    },
                     { name: "rate", type: "uint128", internalType: "uint128" },
                   ],
                 },
@@ -428,7 +598,11 @@ const externalContracts = {
                   internalType: "struct RateLimiter.Config",
                   components: [
                     { name: "isEnabled", type: "bool", internalType: "bool" },
-                    { name: "capacity", type: "uint128", internalType: "uint128" },
+                    {
+                      name: "capacity",
+                      type: "uint128",
+                      internalType: "uint128",
+                    },
                     { name: "rate", type: "uint128", internalType: "uint128" },
                   ],
                 },
@@ -455,7 +629,13 @@ const externalContracts = {
         {
           type: "function",
           name: "getCurrentInboundRateLimiterState",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [
             {
               name: "",
@@ -475,7 +655,13 @@ const externalContracts = {
         {
           type: "function",
           name: "getCurrentOutboundRateLimiterState",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [
             {
               name: "",
@@ -502,14 +688,26 @@ const externalContracts = {
         {
           type: "function",
           name: "getRemotePools",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [{ name: "", type: "bytes[]", internalType: "bytes[]" }],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "getRemoteToken",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [{ name: "", type: "bytes", internalType: "bytes" }],
           stateMutability: "view",
         },
@@ -517,14 +715,18 @@ const externalContracts = {
           type: "function",
           name: "getRmnProxy",
           inputs: [],
-          outputs: [{ name: "rmnProxy", type: "address", internalType: "address" }],
+          outputs: [
+            { name: "rmnProxy", type: "address", internalType: "address" },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "getRouter",
           inputs: [],
-          outputs: [{ name: "router", type: "address", internalType: "address" }],
+          outputs: [
+            { name: "router", type: "address", internalType: "address" },
+          ],
           stateMutability: "view",
         },
         {
@@ -538,7 +740,9 @@ const externalContracts = {
           type: "function",
           name: "getToken",
           inputs: [],
-          outputs: [{ name: "token", type: "address", internalType: "contract IERC20" }],
+          outputs: [
+            { name: "token", type: "address", internalType: "contract IERC20" },
+          ],
           stateMutability: "view",
         },
         {
@@ -552,7 +756,11 @@ const externalContracts = {
           type: "function",
           name: "isRemotePool",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
@@ -561,7 +769,13 @@ const externalContracts = {
         {
           type: "function",
           name: "isSupportedChain",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
           stateMutability: "view",
         },
@@ -582,10 +796,22 @@ const externalContracts = {
               internalType: "struct Pool.LockOrBurnInV1",
               components: [
                 { name: "receiver", type: "bytes", internalType: "bytes" },
-                { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
-                { name: "originalSender", type: "address", internalType: "address" },
+                {
+                  name: "remoteChainSelector",
+                  type: "uint64",
+                  internalType: "uint64",
+                },
+                {
+                  name: "originalSender",
+                  type: "address",
+                  internalType: "address",
+                },
                 { name: "amount", type: "uint256", internalType: "uint256" },
-                { name: "localToken", type: "address", internalType: "address" },
+                {
+                  name: "localToken",
+                  type: "address",
+                  internalType: "address",
+                },
               ],
             },
           ],
@@ -595,7 +821,11 @@ const externalContracts = {
               type: "tuple",
               internalType: "struct Pool.LockOrBurnOutV1",
               components: [
-                { name: "destTokenAddress", type: "bytes", internalType: "bytes" },
+                {
+                  name: "destTokenAddress",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
                 { name: "destPoolData", type: "bytes", internalType: "bytes" },
               ],
             },
@@ -618,14 +848,42 @@ const externalContracts = {
               type: "tuple",
               internalType: "struct Pool.ReleaseOrMintInV1",
               components: [
-                { name: "originalSender", type: "bytes", internalType: "bytes" },
-                { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+                {
+                  name: "originalSender",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
+                {
+                  name: "remoteChainSelector",
+                  type: "uint64",
+                  internalType: "uint64",
+                },
                 { name: "receiver", type: "address", internalType: "address" },
-                { name: "sourceDenominatedAmount", type: "uint256", internalType: "uint256" },
-                { name: "localToken", type: "address", internalType: "address" },
-                { name: "sourcePoolAddress", type: "bytes", internalType: "bytes" },
-                { name: "sourcePoolData", type: "bytes", internalType: "bytes" },
-                { name: "offchainTokenData", type: "bytes", internalType: "bytes" },
+                {
+                  name: "sourceDenominatedAmount",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+                {
+                  name: "localToken",
+                  type: "address",
+                  internalType: "address",
+                },
+                {
+                  name: "sourcePoolAddress",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
+                {
+                  name: "sourcePoolData",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
+                {
+                  name: "offchainTokenData",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
               ],
             },
           ],
@@ -634,7 +892,13 @@ const externalContracts = {
               name: "",
               type: "tuple",
               internalType: "struct Pool.ReleaseOrMintOutV1",
-              components: [{ name: "destinationAmount", type: "uint256", internalType: "uint256" }],
+              components: [
+                {
+                  name: "destinationAmount",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+              ],
             },
           ],
           stateMutability: "nonpayable",
@@ -643,7 +907,11 @@ const externalContracts = {
           type: "function",
           name: "removeRemotePool",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
           outputs: [],
@@ -653,7 +921,11 @@ const externalContracts = {
           type: "function",
           name: "setChainRateLimiterConfig",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             {
               name: "outboundConfig",
               type: "tuple",
@@ -682,7 +954,11 @@ const externalContracts = {
           type: "function",
           name: "setChainRateLimiterConfigs",
           inputs: [
-            { name: "remoteChainSelectors", type: "uint64[]", internalType: "uint64[]" },
+            {
+              name: "remoteChainSelectors",
+              type: "uint64[]",
+              internalType: "uint64[]",
+            },
             {
               name: "outboundConfigs",
               type: "tuple[]",
@@ -710,21 +986,31 @@ const externalContracts = {
         {
           type: "function",
           name: "setRateLimitAdmin",
-          inputs: [{ name: "rateLimitAdmin", type: "address", internalType: "address" }],
+          inputs: [
+            {
+              name: "rateLimitAdmin",
+              type: "address",
+              internalType: "address",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setRouter",
-          inputs: [{ name: "newRouter", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "newRouter", type: "address", internalType: "address" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "supportsInterface",
-          inputs: [{ name: "interfaceId", type: "bytes4", internalType: "bytes4" }],
+          inputs: [
+            { name: "interfaceId", type: "bytes4", internalType: "bytes4" },
+          ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
           stateMutability: "pure",
         },
@@ -738,21 +1024,45 @@ const externalContracts = {
         {
           type: "event",
           name: "AllowListAdd",
-          inputs: [{ name: "sender", type: "address", indexed: false, internalType: "address" }],
+          inputs: [
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "AllowListRemove",
-          inputs: [{ name: "sender", type: "address", indexed: false, internalType: "address" }],
+          inputs: [
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "ChainAdded",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: false, internalType: "uint64" },
-            { name: "remoteToken", type: "bytes", indexed: false, internalType: "bytes" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+            {
+              name: "remoteToken",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
             {
               name: "outboundRateLimiterConfig",
               type: "tuple",
@@ -782,7 +1092,12 @@ const externalContracts = {
           type: "event",
           name: "ChainConfigured",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: false, internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
             {
               name: "outboundRateLimiterConfig",
               type: "tuple",
@@ -811,7 +1126,14 @@ const externalContracts = {
         {
           type: "event",
           name: "ChainRemoved",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", indexed: false, internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+          ],
           anonymous: false,
         },
         {
@@ -836,9 +1158,24 @@ const externalContracts = {
           type: "event",
           name: "InboundRateLimitConsumed",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -846,10 +1183,30 @@ const externalContracts = {
           type: "event",
           name: "LockedOrBurned",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "sender", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -857,9 +1214,24 @@ const externalContracts = {
           type: "event",
           name: "OutboundRateLimitConsumed",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -867,8 +1239,18 @@ const externalContracts = {
           type: "event",
           name: "OwnershipTransferRequested",
           inputs: [
-            { name: "from", type: "address", indexed: true, internalType: "address" },
-            { name: "to", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -876,26 +1258,68 @@ const externalContracts = {
           type: "event",
           name: "OwnershipTransferred",
           inputs: [
-            { name: "from", type: "address", indexed: true, internalType: "address" },
-            { name: "to", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
         {
           type: "event",
           name: "RateLimitAdminSet",
-          inputs: [{ name: "rateLimitAdmin", type: "address", indexed: false, internalType: "address" }],
+          inputs: [
+            {
+              name: "rateLimitAdmin",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "ReleasedOrMinted",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "sender", type: "address", indexed: false, internalType: "address" },
-            { name: "recipient", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "recipient",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -903,8 +1327,18 @@ const externalContracts = {
           type: "event",
           name: "RemotePoolAdded",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "remotePoolAddress", type: "bytes", indexed: false, internalType: "bytes" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "remotePoolAddress",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
           ],
           anonymous: false,
         },
@@ -912,8 +1346,18 @@ const externalContracts = {
           type: "event",
           name: "RemotePoolRemoved",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "remotePoolAddress", type: "bytes", indexed: false, internalType: "bytes" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "remotePoolAddress",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
           ],
           anonymous: false,
         },
@@ -921,8 +1365,18 @@ const externalContracts = {
           type: "event",
           name: "RouterUpdated",
           inputs: [
-            { name: "oldRouter", type: "address", indexed: false, internalType: "address" },
-            { name: "newRouter", type: "address", indexed: false, internalType: "address" },
+            {
+              name: "oldRouter",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "newRouter",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -931,18 +1385,28 @@ const externalContracts = {
         {
           type: "error",
           name: "CallerIsNotARampOnRouter",
-          inputs: [{ name: "caller", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "caller", type: "address", internalType: "address" },
+          ],
         },
         { type: "error", name: "CannotTransferToSelf", inputs: [] },
         {
           type: "error",
           name: "ChainAlreadyExists",
-          inputs: [{ name: "chainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            { name: "chainSelector", type: "uint64", internalType: "uint64" },
+          ],
         },
         {
           type: "error",
           name: "ChainNotAllowed",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
         },
         { type: "error", name: "CursedByRMN", inputs: [] },
         {
@@ -988,28 +1452,46 @@ const externalContracts = {
         {
           type: "error",
           name: "InvalidRemoteChainDecimals",
-          inputs: [{ name: "sourcePoolData", type: "bytes", internalType: "bytes" }],
+          inputs: [
+            { name: "sourcePoolData", type: "bytes", internalType: "bytes" },
+          ],
         },
         {
           type: "error",
           name: "InvalidRemotePoolForChain",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
         },
         {
           type: "error",
           name: "InvalidSourcePoolAddress",
-          inputs: [{ name: "sourcePoolAddress", type: "bytes", internalType: "bytes" }],
+          inputs: [
+            { name: "sourcePoolAddress", type: "bytes", internalType: "bytes" },
+          ],
         },
-        { type: "error", name: "InvalidToken", inputs: [{ name: "token", type: "address", internalType: "address" }] },
+        {
+          type: "error",
+          name: "InvalidToken",
+          inputs: [{ name: "token", type: "address", internalType: "address" }],
+        },
         { type: "error", name: "MismatchedArrayLengths", inputs: [] },
         { type: "error", name: "MustBeProposedOwner", inputs: [] },
         {
           type: "error",
           name: "NonExistentChain",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
         },
         { type: "error", name: "OnlyCallableByOwner", inputs: [] },
         {
@@ -1026,14 +1508,20 @@ const externalContracts = {
           type: "error",
           name: "PoolAlreadyAdded",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
         },
         {
           type: "error",
           name: "SenderNotAllowed",
-          inputs: [{ name: "sender", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "sender", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
@@ -1048,12 +1536,22 @@ const externalContracts = {
           type: "error",
           name: "TokenRateLimitReached",
           inputs: [
-            { name: "minWaitInSeconds", type: "uint256", internalType: "uint256" },
+            {
+              name: "minWaitInSeconds",
+              type: "uint256",
+              internalType: "uint256",
+            },
             { name: "available", type: "uint256", internalType: "uint256" },
             { name: "tokenAddress", type: "address", internalType: "address" },
           ],
         },
-        { type: "error", name: "Unauthorized", inputs: [{ name: "caller", type: "address", internalType: "address" }] },
+        {
+          type: "error",
+          name: "Unauthorized",
+          inputs: [
+            { name: "caller", type: "address", internalType: "address" },
+          ],
+        },
         { type: "error", name: "ZeroAddressInvalid", inputs: [] },
       ],
     },
@@ -1062,11 +1560,23 @@ const externalContracts = {
       abi: [
         {
           type: "constructor",
-          inputs: [{ name: "_rebaseTokenAddress", type: "address", internalType: "contract IRebaseToken" }],
+          inputs: [
+            {
+              name: "_rebaseTokenAddress",
+              type: "address",
+              internalType: "contract IRebaseToken",
+            },
+          ],
           stateMutability: "nonpayable",
         },
         { type: "receive", stateMutability: "payable" },
-        { type: "function", name: "deposit", inputs: [], outputs: [], stateMutability: "payable" },
+        {
+          type: "function",
+          name: "deposit",
+          inputs: [],
+          outputs: [],
+          stateMutability: "payable",
+        },
         {
           type: "function",
           name: "getRebaseTokenAddress",
@@ -1077,7 +1587,9 @@ const externalContracts = {
         {
           type: "function",
           name: "redeem",
-          inputs: [{ name: "_amount", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            { name: "_amount", type: "uint256", internalType: "uint256" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -1085,8 +1597,18 @@ const externalContracts = {
           type: "event",
           name: "Deposit",
           inputs: [
-            { name: "user", type: "address", indexed: true, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "user",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1094,8 +1616,18 @@ const externalContracts = {
           type: "event",
           name: "Redeem",
           inputs: [
-            { name: "user", type: "address", indexed: true, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "user",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1191,7 +1723,9 @@ const externalContracts = {
         {
           type: "function",
           name: "grantMintAndBurnRole",
-          inputs: [{ name: "_account", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "_account", type: "address", internalType: "address" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -1247,13 +1781,23 @@ const externalContracts = {
           outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
           stateMutability: "view",
         },
-        { type: "function", name: "renounceOwnership", inputs: [], outputs: [], stateMutability: "nonpayable" },
+        {
+          type: "function",
+          name: "renounceOwnership",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
         {
           type: "function",
           name: "renounceRole",
           inputs: [
             { name: "role", type: "bytes32", internalType: "bytes32" },
-            { name: "callerConfirmation", type: "address", internalType: "address" },
+            {
+              name: "callerConfirmation",
+              type: "address",
+              internalType: "address",
+            },
           ],
           outputs: [],
           stateMutability: "nonpayable",
@@ -1271,14 +1815,22 @@ const externalContracts = {
         {
           type: "function",
           name: "setInterestRate",
-          inputs: [{ name: "_newInterestRate", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "_newInterestRate",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "supportsInterface",
-          inputs: [{ name: "interfaceId", type: "bytes4", internalType: "bytes4" }],
+          inputs: [
+            { name: "interfaceId", type: "bytes4", internalType: "bytes4" },
+          ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
           stateMutability: "view",
         },
@@ -1320,7 +1872,9 @@ const externalContracts = {
         {
           type: "function",
           name: "transferOwnership",
-          inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "newOwner", type: "address", internalType: "address" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -1328,24 +1882,56 @@ const externalContracts = {
           type: "event",
           name: "Approval",
           inputs: [
-            { name: "owner", type: "address", indexed: true, internalType: "address" },
-            { name: "spender", type: "address", indexed: true, internalType: "address" },
-            { name: "value", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "owner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "spender",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "value",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
         {
           type: "event",
           name: "InterestRateSet",
-          inputs: [{ name: "newInterestRate", type: "uint256", indexed: false, internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newInterestRate",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "OwnershipTransferred",
           inputs: [
-            { name: "previousOwner", type: "address", indexed: true, internalType: "address" },
-            { name: "newOwner", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "previousOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "newOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -1353,9 +1939,24 @@ const externalContracts = {
           type: "event",
           name: "RoleAdminChanged",
           inputs: [
-            { name: "role", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "previousAdminRole", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "newAdminRole", type: "bytes32", indexed: true, internalType: "bytes32" },
+            {
+              name: "role",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "previousAdminRole",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "newAdminRole",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
           ],
           anonymous: false,
         },
@@ -1363,9 +1964,24 @@ const externalContracts = {
           type: "event",
           name: "RoleGranted",
           inputs: [
-            { name: "role", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "account", type: "address", indexed: true, internalType: "address" },
-            { name: "sender", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "role",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "account",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -1373,9 +1989,24 @@ const externalContracts = {
           type: "event",
           name: "RoleRevoked",
           inputs: [
-            { name: "role", type: "bytes32", indexed: true, internalType: "bytes32" },
-            { name: "account", type: "address", indexed: true, internalType: "address" },
-            { name: "sender", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "role",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+            {
+              name: "account",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -1383,9 +2014,24 @@ const externalContracts = {
           type: "event",
           name: "Transfer",
           inputs: [
-            { name: "from", type: "address", indexed: true, internalType: "address" },
-            { name: "to", type: "address", indexed: true, internalType: "address" },
-            { name: "value", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "value",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1419,22 +2065,30 @@ const externalContracts = {
         {
           type: "error",
           name: "ERC20InvalidApprover",
-          inputs: [{ name: "approver", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "approver", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "ERC20InvalidReceiver",
-          inputs: [{ name: "receiver", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "receiver", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "ERC20InvalidSender",
-          inputs: [{ name: "sender", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "sender", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "ERC20InvalidSpender",
-          inputs: [{ name: "spender", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "spender", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
@@ -1444,14 +2098,24 @@ const externalContracts = {
         {
           type: "error",
           name: "OwnableUnauthorizedAccount",
-          inputs: [{ name: "account", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "account", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
           name: "RebaseToken__InterestCanOnlyDecrease",
           inputs: [
-            { name: "oldInterestRate", type: "uint256", internalType: "uint256" },
-            { name: "newInterestRate", type: "uint256", internalType: "uint256" },
+            {
+              name: "oldInterestRate",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "newInterestRate",
+              type: "uint256",
+              internalType: "uint256",
+            },
           ],
         },
       ],
@@ -1462,20 +2126,38 @@ const externalContracts = {
         {
           type: "constructor",
           inputs: [
-            { name: "_token", type: "address", internalType: "contract IERC20" },
+            {
+              name: "_token",
+              type: "address",
+              internalType: "contract IERC20",
+            },
             { name: "tokenDecimals", type: "uint8", internalType: "uint8" },
-            { name: "_whitelist", type: "address[]", internalType: "address[]" },
+            {
+              name: "_whitelist",
+              type: "address[]",
+              internalType: "address[]",
+            },
             { name: "_rnmProxy", type: "address", internalType: "address" },
             { name: "_router", type: "address", internalType: "address" },
           ],
           stateMutability: "nonpayable",
         },
-        { type: "function", name: "acceptOwnership", inputs: [], outputs: [], stateMutability: "nonpayable" },
+        {
+          type: "function",
+          name: "acceptOwnership",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
         {
           type: "function",
           name: "addRemotePool",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
           outputs: [],
@@ -1495,22 +2177,42 @@ const externalContracts = {
           type: "function",
           name: "applyChainUpdates",
           inputs: [
-            { name: "remoteChainSelectorsToRemove", type: "uint64[]", internalType: "uint64[]" },
+            {
+              name: "remoteChainSelectorsToRemove",
+              type: "uint64[]",
+              internalType: "uint64[]",
+            },
             {
               name: "chainsToAdd",
               type: "tuple[]",
               internalType: "struct TokenPool.ChainUpdate[]",
               components: [
-                { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
-                { name: "remotePoolAddresses", type: "bytes[]", internalType: "bytes[]" },
-                { name: "remoteTokenAddress", type: "bytes", internalType: "bytes" },
+                {
+                  name: "remoteChainSelector",
+                  type: "uint64",
+                  internalType: "uint64",
+                },
+                {
+                  name: "remotePoolAddresses",
+                  type: "bytes[]",
+                  internalType: "bytes[]",
+                },
+                {
+                  name: "remoteTokenAddress",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
                 {
                   name: "outboundRateLimiterConfig",
                   type: "tuple",
                   internalType: "struct RateLimiter.Config",
                   components: [
                     { name: "isEnabled", type: "bool", internalType: "bool" },
-                    { name: "capacity", type: "uint128", internalType: "uint128" },
+                    {
+                      name: "capacity",
+                      type: "uint128",
+                      internalType: "uint128",
+                    },
                     { name: "rate", type: "uint128", internalType: "uint128" },
                   ],
                 },
@@ -1520,7 +2222,11 @@ const externalContracts = {
                   internalType: "struct RateLimiter.Config",
                   components: [
                     { name: "isEnabled", type: "bool", internalType: "bool" },
-                    { name: "capacity", type: "uint128", internalType: "uint128" },
+                    {
+                      name: "capacity",
+                      type: "uint128",
+                      internalType: "uint128",
+                    },
                     { name: "rate", type: "uint128", internalType: "uint128" },
                   ],
                 },
@@ -1547,7 +2253,13 @@ const externalContracts = {
         {
           type: "function",
           name: "getCurrentInboundRateLimiterState",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [
             {
               name: "",
@@ -1567,7 +2279,13 @@ const externalContracts = {
         {
           type: "function",
           name: "getCurrentOutboundRateLimiterState",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [
             {
               name: "",
@@ -1594,14 +2312,26 @@ const externalContracts = {
         {
           type: "function",
           name: "getRemotePools",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [{ name: "", type: "bytes[]", internalType: "bytes[]" }],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "getRemoteToken",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [{ name: "", type: "bytes", internalType: "bytes" }],
           stateMutability: "view",
         },
@@ -1609,14 +2339,18 @@ const externalContracts = {
           type: "function",
           name: "getRmnProxy",
           inputs: [],
-          outputs: [{ name: "rmnProxy", type: "address", internalType: "address" }],
+          outputs: [
+            { name: "rmnProxy", type: "address", internalType: "address" },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "getRouter",
           inputs: [],
-          outputs: [{ name: "router", type: "address", internalType: "address" }],
+          outputs: [
+            { name: "router", type: "address", internalType: "address" },
+          ],
           stateMutability: "view",
         },
         {
@@ -1630,7 +2364,9 @@ const externalContracts = {
           type: "function",
           name: "getToken",
           inputs: [],
-          outputs: [{ name: "token", type: "address", internalType: "contract IERC20" }],
+          outputs: [
+            { name: "token", type: "address", internalType: "contract IERC20" },
+          ],
           stateMutability: "view",
         },
         {
@@ -1644,7 +2380,11 @@ const externalContracts = {
           type: "function",
           name: "isRemotePool",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
@@ -1653,7 +2393,13 @@ const externalContracts = {
         {
           type: "function",
           name: "isSupportedChain",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
           stateMutability: "view",
         },
@@ -1674,10 +2420,22 @@ const externalContracts = {
               internalType: "struct Pool.LockOrBurnInV1",
               components: [
                 { name: "receiver", type: "bytes", internalType: "bytes" },
-                { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
-                { name: "originalSender", type: "address", internalType: "address" },
+                {
+                  name: "remoteChainSelector",
+                  type: "uint64",
+                  internalType: "uint64",
+                },
+                {
+                  name: "originalSender",
+                  type: "address",
+                  internalType: "address",
+                },
                 { name: "amount", type: "uint256", internalType: "uint256" },
-                { name: "localToken", type: "address", internalType: "address" },
+                {
+                  name: "localToken",
+                  type: "address",
+                  internalType: "address",
+                },
               ],
             },
           ],
@@ -1687,7 +2445,11 @@ const externalContracts = {
               type: "tuple",
               internalType: "struct Pool.LockOrBurnOutV1",
               components: [
-                { name: "destTokenAddress", type: "bytes", internalType: "bytes" },
+                {
+                  name: "destTokenAddress",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
                 { name: "destPoolData", type: "bytes", internalType: "bytes" },
               ],
             },
@@ -1710,14 +2472,42 @@ const externalContracts = {
               type: "tuple",
               internalType: "struct Pool.ReleaseOrMintInV1",
               components: [
-                { name: "originalSender", type: "bytes", internalType: "bytes" },
-                { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+                {
+                  name: "originalSender",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
+                {
+                  name: "remoteChainSelector",
+                  type: "uint64",
+                  internalType: "uint64",
+                },
                 { name: "receiver", type: "address", internalType: "address" },
-                { name: "sourceDenominatedAmount", type: "uint256", internalType: "uint256" },
-                { name: "localToken", type: "address", internalType: "address" },
-                { name: "sourcePoolAddress", type: "bytes", internalType: "bytes" },
-                { name: "sourcePoolData", type: "bytes", internalType: "bytes" },
-                { name: "offchainTokenData", type: "bytes", internalType: "bytes" },
+                {
+                  name: "sourceDenominatedAmount",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+                {
+                  name: "localToken",
+                  type: "address",
+                  internalType: "address",
+                },
+                {
+                  name: "sourcePoolAddress",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
+                {
+                  name: "sourcePoolData",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
+                {
+                  name: "offchainTokenData",
+                  type: "bytes",
+                  internalType: "bytes",
+                },
               ],
             },
           ],
@@ -1726,7 +2516,13 @@ const externalContracts = {
               name: "",
               type: "tuple",
               internalType: "struct Pool.ReleaseOrMintOutV1",
-              components: [{ name: "destinationAmount", type: "uint256", internalType: "uint256" }],
+              components: [
+                {
+                  name: "destinationAmount",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+              ],
             },
           ],
           stateMutability: "nonpayable",
@@ -1735,7 +2531,11 @@ const externalContracts = {
           type: "function",
           name: "removeRemotePool",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
           outputs: [],
@@ -1745,7 +2545,11 @@ const externalContracts = {
           type: "function",
           name: "setChainRateLimiterConfig",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             {
               name: "outboundConfig",
               type: "tuple",
@@ -1774,7 +2578,11 @@ const externalContracts = {
           type: "function",
           name: "setChainRateLimiterConfigs",
           inputs: [
-            { name: "remoteChainSelectors", type: "uint64[]", internalType: "uint64[]" },
+            {
+              name: "remoteChainSelectors",
+              type: "uint64[]",
+              internalType: "uint64[]",
+            },
             {
               name: "outboundConfigs",
               type: "tuple[]",
@@ -1802,21 +2610,31 @@ const externalContracts = {
         {
           type: "function",
           name: "setRateLimitAdmin",
-          inputs: [{ name: "rateLimitAdmin", type: "address", internalType: "address" }],
+          inputs: [
+            {
+              name: "rateLimitAdmin",
+              type: "address",
+              internalType: "address",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setRouter",
-          inputs: [{ name: "newRouter", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "newRouter", type: "address", internalType: "address" },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "supportsInterface",
-          inputs: [{ name: "interfaceId", type: "bytes4", internalType: "bytes4" }],
+          inputs: [
+            { name: "interfaceId", type: "bytes4", internalType: "bytes4" },
+          ],
           outputs: [{ name: "", type: "bool", internalType: "bool" }],
           stateMutability: "pure",
         },
@@ -1830,21 +2648,45 @@ const externalContracts = {
         {
           type: "event",
           name: "AllowListAdd",
-          inputs: [{ name: "sender", type: "address", indexed: false, internalType: "address" }],
+          inputs: [
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "AllowListRemove",
-          inputs: [{ name: "sender", type: "address", indexed: false, internalType: "address" }],
+          inputs: [
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "ChainAdded",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: false, internalType: "uint64" },
-            { name: "remoteToken", type: "bytes", indexed: false, internalType: "bytes" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+            {
+              name: "remoteToken",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
             {
               name: "outboundRateLimiterConfig",
               type: "tuple",
@@ -1874,7 +2716,12 @@ const externalContracts = {
           type: "event",
           name: "ChainConfigured",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: false, internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
             {
               name: "outboundRateLimiterConfig",
               type: "tuple",
@@ -1903,7 +2750,14 @@ const externalContracts = {
         {
           type: "event",
           name: "ChainRemoved",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", indexed: false, internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+          ],
           anonymous: false,
         },
         {
@@ -1928,9 +2782,24 @@ const externalContracts = {
           type: "event",
           name: "InboundRateLimitConsumed",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1938,10 +2807,30 @@ const externalContracts = {
           type: "event",
           name: "LockedOrBurned",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "sender", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1949,9 +2838,24 @@ const externalContracts = {
           type: "event",
           name: "OutboundRateLimitConsumed",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1959,8 +2863,18 @@ const externalContracts = {
           type: "event",
           name: "OwnershipTransferRequested",
           inputs: [
-            { name: "from", type: "address", indexed: true, internalType: "address" },
-            { name: "to", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -1968,26 +2882,68 @@ const externalContracts = {
           type: "event",
           name: "OwnershipTransferred",
           inputs: [
-            { name: "from", type: "address", indexed: true, internalType: "address" },
-            { name: "to", type: "address", indexed: true, internalType: "address" },
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
         {
           type: "event",
           name: "RateLimitAdminSet",
-          inputs: [{ name: "rateLimitAdmin", type: "address", indexed: false, internalType: "address" }],
+          inputs: [
+            {
+              name: "rateLimitAdmin",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
           name: "ReleasedOrMinted",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "token", type: "address", indexed: false, internalType: "address" },
-            { name: "sender", type: "address", indexed: false, internalType: "address" },
-            { name: "recipient", type: "address", indexed: false, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "token",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "sender",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "recipient",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -1995,8 +2951,18 @@ const externalContracts = {
           type: "event",
           name: "RemotePoolAdded",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "remotePoolAddress", type: "bytes", indexed: false, internalType: "bytes" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "remotePoolAddress",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
           ],
           anonymous: false,
         },
@@ -2004,8 +2970,18 @@ const externalContracts = {
           type: "event",
           name: "RemotePoolRemoved",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", indexed: true, internalType: "uint64" },
-            { name: "remotePoolAddress", type: "bytes", indexed: false, internalType: "bytes" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              indexed: true,
+              internalType: "uint64",
+            },
+            {
+              name: "remotePoolAddress",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
           ],
           anonymous: false,
         },
@@ -2013,8 +2989,18 @@ const externalContracts = {
           type: "event",
           name: "RouterUpdated",
           inputs: [
-            { name: "oldRouter", type: "address", indexed: false, internalType: "address" },
-            { name: "newRouter", type: "address", indexed: false, internalType: "address" },
+            {
+              name: "oldRouter",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+            {
+              name: "newRouter",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
           ],
           anonymous: false,
         },
@@ -2023,18 +3009,28 @@ const externalContracts = {
         {
           type: "error",
           name: "CallerIsNotARampOnRouter",
-          inputs: [{ name: "caller", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "caller", type: "address", internalType: "address" },
+          ],
         },
         { type: "error", name: "CannotTransferToSelf", inputs: [] },
         {
           type: "error",
           name: "ChainAlreadyExists",
-          inputs: [{ name: "chainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            { name: "chainSelector", type: "uint64", internalType: "uint64" },
+          ],
         },
         {
           type: "error",
           name: "ChainNotAllowed",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
         },
         { type: "error", name: "CursedByRMN", inputs: [] },
         {
@@ -2080,28 +3076,46 @@ const externalContracts = {
         {
           type: "error",
           name: "InvalidRemoteChainDecimals",
-          inputs: [{ name: "sourcePoolData", type: "bytes", internalType: "bytes" }],
+          inputs: [
+            { name: "sourcePoolData", type: "bytes", internalType: "bytes" },
+          ],
         },
         {
           type: "error",
           name: "InvalidRemotePoolForChain",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
         },
         {
           type: "error",
           name: "InvalidSourcePoolAddress",
-          inputs: [{ name: "sourcePoolAddress", type: "bytes", internalType: "bytes" }],
+          inputs: [
+            { name: "sourcePoolAddress", type: "bytes", internalType: "bytes" },
+          ],
         },
-        { type: "error", name: "InvalidToken", inputs: [{ name: "token", type: "address", internalType: "address" }] },
+        {
+          type: "error",
+          name: "InvalidToken",
+          inputs: [{ name: "token", type: "address", internalType: "address" }],
+        },
         { type: "error", name: "MismatchedArrayLengths", inputs: [] },
         { type: "error", name: "MustBeProposedOwner", inputs: [] },
         {
           type: "error",
           name: "NonExistentChain",
-          inputs: [{ name: "remoteChainSelector", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
         },
         { type: "error", name: "OnlyCallableByOwner", inputs: [] },
         {
@@ -2118,14 +3132,20 @@ const externalContracts = {
           type: "error",
           name: "PoolAlreadyAdded",
           inputs: [
-            { name: "remoteChainSelector", type: "uint64", internalType: "uint64" },
+            {
+              name: "remoteChainSelector",
+              type: "uint64",
+              internalType: "uint64",
+            },
             { name: "remotePoolAddress", type: "bytes", internalType: "bytes" },
           ],
         },
         {
           type: "error",
           name: "SenderNotAllowed",
-          inputs: [{ name: "sender", type: "address", internalType: "address" }],
+          inputs: [
+            { name: "sender", type: "address", internalType: "address" },
+          ],
         },
         {
           type: "error",
@@ -2140,12 +3160,22 @@ const externalContracts = {
           type: "error",
           name: "TokenRateLimitReached",
           inputs: [
-            { name: "minWaitInSeconds", type: "uint256", internalType: "uint256" },
+            {
+              name: "minWaitInSeconds",
+              type: "uint256",
+              internalType: "uint256",
+            },
             { name: "available", type: "uint256", internalType: "uint256" },
             { name: "tokenAddress", type: "address", internalType: "address" },
           ],
         },
-        { type: "error", name: "Unauthorized", inputs: [{ name: "caller", type: "address", internalType: "address" }] },
+        {
+          type: "error",
+          name: "Unauthorized",
+          inputs: [
+            { name: "caller", type: "address", internalType: "address" },
+          ],
+        },
         { type: "error", name: "ZeroAddressInvalid", inputs: [] },
       ],
     },

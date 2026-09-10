@@ -15,16 +15,20 @@ export function DebugContracts() {
   const contractNames = useMemo(
     () =>
       Object.keys(contractsData).sort((a, b) => {
-        return a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" });
+        return a.localeCompare(b, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        });
       }) as ContractName[],
     [contractsData],
   );
 
-  const [selectedContract, setSelectedContract] = useSessionStorage<ContractName>(
-    selectedContractStorageKey,
-    contractNames[0],
-    { initializeWithValue: false },
-  );
+  const [selectedContract, setSelectedContract] =
+    useSessionStorage<ContractName>(
+      selectedContractStorageKey,
+      contractNames[0],
+      { initializeWithValue: false },
+    );
 
   useEffect(() => {
     if (!contractNames.includes(selectedContract)) {
@@ -51,8 +55,12 @@ export function DebugContracts() {
                   onClick={() => setSelectedContract(contractName)}
                 >
                   {contractName}
-                  {(contractsData[contractName] as GenericContract)?.external && (
-                    <span className="tooltip tooltip-top tooltip-accent" data-tip="External contract">
+                  {(contractsData[contractName] as GenericContract)
+                    ?.external && (
+                    <span
+                      className="tooltip tooltip-top tooltip-accent"
+                      data-tip="External contract"
+                    >
                       <BarsArrowUpIcon className="h-4 w-4 cursor-pointer" />
                     </span>
                   )}
@@ -62,7 +70,9 @@ export function DebugContracts() {
           )}
           {contractNames.map(
             contractName =>
-              contractName === selectedContract && <ContractUI key={contractName} contractName={contractName} />,
+              contractName === selectedContract && (
+                <ContractUI key={contractName} contractName={contractName} />
+              ),
           )}
         </>
       )}

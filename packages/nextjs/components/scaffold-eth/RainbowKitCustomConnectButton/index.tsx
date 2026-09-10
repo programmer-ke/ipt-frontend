@@ -32,7 +32,11 @@ export const RainbowKitCustomConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button className="btn btn-primary btn-sm" onClick={openConnectModal} type="button">
+                  <button
+                    className="btn btn-primary btn-sm"
+                    onClick={openConnectModal}
+                    type="button"
+                  >
                     Connect Wallet
                   </button>
                 );
@@ -63,7 +67,10 @@ export const RainbowKitCustomConnectButton = () => {
                     ensAvatar={account.ensAvatar}
                     blockExplorerAddressLink={blockExplorerAddressLink}
                   />
-                  <AddressQRCodeModal address={account.address as Address} modalId="qrcode-modal" />
+                  <AddressQRCodeModal
+                    address={account.address as Address}
+                    modalId="qrcode-modal"
+                  />
                   <RevealBurnerPKModal />
                 </>
               );

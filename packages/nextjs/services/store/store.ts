@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import scaffoldConfig from "~~/scaffold.config";
-import { ChainWithAttributes, NETWORKS_EXTRA_DATA } from "~~/utils/scaffold-eth";
+import {
+  ChainWithAttributes,
+  NETWORKS_EXTRA_DATA,
+} from "~~/utils/scaffold-eth";
 
 /**
  * Zustand Store
@@ -21,5 +24,6 @@ export const useGlobalState = create<GlobalState>(set => ({
     ...scaffoldConfig.targetNetworks[0],
     ...NETWORKS_EXTRA_DATA[scaffoldConfig.targetNetworks[0].id],
   },
-  setTargetNetwork: (newTargetNetwork: ChainWithAttributes) => set(() => ({ targetNetwork: newTargetNetwork })),
+  setTargetNetwork: (newTargetNetwork: ChainWithAttributes) =>
+    set(() => ({ targetNetwork: newTargetNetwork })),
 }));

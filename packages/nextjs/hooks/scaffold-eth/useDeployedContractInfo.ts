@@ -35,7 +35,9 @@ export function useDeployedContractInfo<TContractName extends ContractName>(
   const isMounted = useIsMounted();
 
   const finalConfig: UseDeployedContractConfig<TContractName> =
-    typeof configOrName === "string" ? { contractName: configOrName } : (configOrName as any);
+    typeof configOrName === "string"
+      ? { contractName: configOrName }
+      : (configOrName as any);
 
   useEffect(() => {
     if (typeof configOrName === "string") {
@@ -46,8 +48,12 @@ export function useDeployedContractInfo<TContractName extends ContractName>(
   }, [configOrName]);
   const { contractName, chainId } = finalConfig;
   const selectedNetwork = useSelectedNetwork(chainId);
-  const deployedContract = contracts?.[selectedNetwork.id]?.[contractName as ContractName] as Contract<TContractName>;
-  const [status, setStatus] = useState<ContractCodeStatus>(ContractCodeStatus.LOADING);
+  const deployedContract = contracts?.[selectedNetwork.id]?.[
+    contractName as ContractName
+  ] as Contract<TContractName>;
+  const [status, setStatus] = useState<ContractCodeStatus>(
+    ContractCodeStatus.LOADING,
+  );
   const publicClient = usePublicClient({ chainId: selectedNetwork.id });
 
   useEffect(() => {

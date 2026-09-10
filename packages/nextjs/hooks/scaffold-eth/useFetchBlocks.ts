@@ -24,7 +24,9 @@ export const testClient = createTestClient({
   .extend(publicActions)
   .extend(walletActions);
 
-const groupTransactionsByBlock = (items: { block: Block; tx: Transaction }[]): Block[] => {
+const groupTransactionsByBlock = (
+  items: { block: Block; tx: Transaction }[],
+): Block[] => {
   const blockMap = new Map<string, Block>();
 
   for (const { block, tx } of items) {
@@ -71,7 +73,9 @@ const fetchPageItems = async (
     }
 
     const fetchedBlocks = await Promise.all(
-      blockNumbers.map(blockNumber => testClient.getBlock({ blockNumber, includeTransactions: true })),
+      blockNumbers.map(blockNumber =>
+        testClient.getBlock({ blockNumber, includeTransactions: true }),
+      ),
     );
 
     for (const block of fetchedBlocks) {
@@ -111,7 +115,9 @@ export const useFetchBlocks = (addressFilter?: Address) => {
     (tx: Transaction) => {
       if (!addressFilter) return true;
       const filter = addressFilter.toLowerCase();
-      return tx.from.toLowerCase() === filter || tx.to?.toLowerCase() === filter;
+      return (
+        tx.from.toLowerCase() === filter || tx.to?.toLowerCase() === filter
+      );
     },
     [addressFilter],
   );
@@ -121,7 +127,11 @@ export const useFetchBlocks = (addressFilter?: Address) => {
 
     try {
       const blockNumber = await testClient.getBlockNumber();
-      const fetchedItems = await fetchPageItems(blockNumber, currentPage, matchesAddressFilter);
+      const fetchedItems = await fetchPageItems(
+        blockNumber,
+        currentPage,
+        matchesAddressFilter,
+      );
       const items = fetchedItems.slice(0, TRANSACTIONS_PER_PAGE);
 
       items.forEach(({ tx }) => decodeTransactionData(tx));
@@ -129,10 +139,14 @@ export const useFetchBlocks = (addressFilter?: Address) => {
       const txReceipts = await Promise.all(
         items.map(async ({ tx }) => {
           try {
-            const receipt = await testClient.getTransactionReceipt({ hash: tx.hash });
+            const receipt = await testClient.getTransactionReceipt({
+              hash: tx.hash,
+            });
             return { [tx.hash]: receipt };
           } catch (err) {
-            setError(err instanceof Error ? err : new Error("An error occurred."));
+            setError(
+              err instanceof Error ? err : new Error("An error occurred."),
+            );
             throw err;
           }
         }),
@@ -140,7 +154,10 @@ export const useFetchBlocks = (addressFilter?: Address) => {
 
       setBlocks(groupTransactionsByBlock(items));
       setHasNextPage(fetchedItems.length > TRANSACTIONS_PER_PAGE);
-      setTransactionReceipts(prevReceipts => ({ ...prevReceipts, ...Object.assign({}, ...txReceipts) }));
+      setTransactionReceipts(prevReceipts => ({
+        ...prevReceipts,
+        ...Object.assign({}, ...txReceipts),
+      }));
     } catch (err) {
       setError(err instanceof Error ? err : new Error("An error occurred."));
     }
@@ -158,26 +175,44 @@ export const useFetchBlocks = (addressFilter?: Address) => {
 
           if (typeof newBlock.transactions[0] === "string") {
             const transactionsDetails = await Promise.all(
-              newBlock.transactions.map(txHash => testClient.getTransaction({ hash: txHash as Hash })),
+              newBlock.transactions.map(txHash =>
+                testClient.getTransaction({ hash: txHash as Hash }),
+              ),
             );
-            blockWithTxDetails = { ...newBlock, transactions: transactionsDetails };
+            blockWithTxDetails = {
+              ...newBlock,
+              transactions: transactionsDetails,
+            };
           }
 
-          const matchingTransactions = (blockWithTxDetails.transactions as Transaction[]).filter(matchesAddressFilter);
+          const matchingTransactions = (
+            blockWithTxDetails.transactions as Transaction[]
+          ).filter(matchesAddressFilter);
           if (matchingTransactions.length === 0) {
             return;
           }
-          blockWithTxDetails = { ...blockWithTxDetails, transactions: matchingTransactions };
+          blockWithTxDetails = {
+            ...blockWithTxDetails,
+            transactions: matchingTransactions,
+          };
 
-          (blockWithTxDetails.transactions as Transaction[]).forEach(tx => decodeTransactionData(tx));
+          (blockWithTxDetails.transactions as Transaction[]).forEach(tx =>
+            decodeTransactionData(tx),
+          );
 
           const receipts = await Promise.all(
             (blockWithTxDetails.transactions as Transaction[]).map(async tx => {
               try {
-                const receipt = await testClient.getTransactionReceipt({ hash: tx.hash });
+                const receipt = await testClient.getTransactionReceipt({
+                  hash: tx.hash,
+                });
                 return { [tx.hash]: receipt };
               } catch (err) {
-                setError(err instanceof Error ? err : new Error("An error occurred fetching receipt."));
+                setError(
+                  err instanceof Error
+                    ? err
+                    : new Error("An error occurred fetching receipt."),
+                );
                 throw err;
               }
             }),
@@ -185,11 +220,15 @@ export const useFetchBlocks = (addressFilter?: Address) => {
 
           setBlocks(prevBlocks => {
             const latestBlockNumber = blockWithTxDetails.number!;
-            const existingBlockIndex = prevBlocks.findIndex(block => block.number === latestBlockNumber);
+            const existingBlockIndex = prevBlocks.findIndex(
+              block => block.number === latestBlockNumber,
+            );
 
             const nextBlocks =
               existingBlockIndex >= 0
-                ? prevBlocks.map((block, index) => (index === existingBlockIndex ? blockWithTxDetails : block))
+                ? prevBlocks.map((block, index) =>
+                    index === existingBlockIndex ? blockWithTxDetails : block,
+                  )
                 : [blockWithTxDetails, ...prevBlocks];
 
             const trimmedBlocks = [...nextBlocks];
@@ -203,7 +242,10 @@ export const useFetchBlocks = (addressFilter?: Address) => {
               setHasNextPage(true);
             }
 
-            while (transactionsInTrimmedBlocks > TRANSACTIONS_PER_PAGE && trimmedBlocks.length > 0) {
+            while (
+              transactionsInTrimmedBlocks > TRANSACTIONS_PER_PAGE &&
+              trimmedBlocks.length > 0
+            ) {
               const removedBlock = trimmedBlocks.pop();
               if (removedBlock) {
                 transactionsInTrimmedBlocks -= removedBlock.transactions.length;
@@ -213,14 +255,20 @@ export const useFetchBlocks = (addressFilter?: Address) => {
             return trimmedBlocks;
           });
 
-          setTransactionReceipts(prevReceipts => ({ ...prevReceipts, ...Object.assign({}, ...receipts) }));
+          setTransactionReceipts(prevReceipts => ({
+            ...prevReceipts,
+            ...Object.assign({}, ...receipts),
+          }));
         }
       } catch (err) {
         setError(err instanceof Error ? err : new Error("An error occurred."));
       }
     };
 
-    return testClient.watchBlocks({ onBlock: handleNewBlock, includeTransactions: true });
+    return testClient.watchBlocks({
+      onBlock: handleNewBlock,
+      includeTransactions: true,
+    });
   }, [currentPage, matchesAddressFilter]);
 
   return {

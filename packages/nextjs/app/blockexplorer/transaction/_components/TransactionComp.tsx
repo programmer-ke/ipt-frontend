@@ -3,11 +3,20 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Address } from "@scaffold-ui/components";
-import { Hash, Transaction, TransactionReceipt, formatEther, formatUnits } from "viem";
+import {
+  Hash,
+  Transaction,
+  TransactionReceipt,
+  formatEther,
+  formatUnits,
+} from "viem";
 import { hardhat } from "viem/chains";
 import { usePublicClient } from "wagmi";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-eth";
+import {
+  decodeTransactionData,
+  getFunctionDetails,
+} from "~~/utils/scaffold-eth";
 import { replacer } from "~~/utils/scaffold-eth/common";
 
 const TransactionComp = ({ txHash }: { txHash: Hash }) => {
@@ -29,7 +38,10 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
         setTransaction(transactionWithDecodedData);
         setReceipt(receipt);
 
-        const functionCalled = transactionWithDecodedData.input.substring(0, 10);
+        const functionCalled = transactionWithDecodedData.input.substring(
+          0,
+          10,
+        );
         setFunctionCalled(functionCalled);
       };
 
@@ -44,7 +56,9 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
       </button>
       {transaction ? (
         <div className="overflow-x-auto">
-          <h2 className="text-3xl font-bold mb-4 text-center text-primary-content">Transaction Details</h2>{" "}
+          <h2 className="text-3xl font-bold mb-4 text-center text-primary-content">
+            Transaction Details
+          </h2>{" "}
           <table className="table bg-base-100 w-full border border-base-300 md:table-lg table-md">
             <tbody>
               <tr>
@@ -64,7 +78,12 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
                   <strong>From:</strong>
                 </td>
                 <td>
-                  <Address address={transaction.from} format="long" onlyEnsOrAddress chain={targetNetwork} />
+                  <Address
+                    address={transaction.from}
+                    format="long"
+                    onlyEnsOrAddress
+                    chain={targetNetwork}
+                  />
                 </td>
               </tr>
               <tr>
@@ -74,12 +93,22 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
                 <td>
                   {!receipt?.contractAddress ? (
                     transaction.to && (
-                      <Address address={transaction.to} format="long" onlyEnsOrAddress chain={targetNetwork} />
+                      <Address
+                        address={transaction.to}
+                        format="long"
+                        onlyEnsOrAddress
+                        chain={targetNetwork}
+                      />
                     )
                   ) : (
                     <span>
                       Contract Creation:
-                      <Address address={receipt.contractAddress} format="long" onlyEnsOrAddress chain={targetNetwork} />
+                      <Address
+                        address={receipt.contractAddress}
+                        format="long"
+                        onlyEnsOrAddress
+                        chain={targetNetwork}
+                      />
                     </span>
                   )}
                 </td>
@@ -89,7 +118,8 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
                   <strong>Value:</strong>
                 </td>
                 <td>
-                  {formatEther(transaction.value)} {targetNetwork.nativeCurrency.symbol}
+                  {formatEther(transaction.value)}{" "}
+                  {targetNetwork.nativeCurrency.symbol}
                 </td>
               </tr>
               <tr>
@@ -102,8 +132,12 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
                       "This transaction did not call any function."
                     ) : (
                       <>
-                        <span className="mr-2">{getFunctionDetails(transaction)}</span>
-                        <span className="badge badge-primary font-bold">{functionCalled}</span>
+                        <span className="mr-2">
+                          {getFunctionDetails(transaction)}
+                        </span>
+                        <span className="badge badge-primary font-bold">
+                          {functionCalled}
+                        </span>
                       </>
                     )}
                   </div>
@@ -135,7 +169,8 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
                   <ul>
                     {receipt?.logs?.map((log, i) => (
                       <li key={i}>
-                        <strong>Log {i} topics:</strong> {JSON.stringify(log.topics, replacer, 2)}
+                        <strong>Log {i} topics:</strong>{" "}
+                        {JSON.stringify(log.topics, replacer, 2)}
                       </li>
                     ))}
                   </ul>

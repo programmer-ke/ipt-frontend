@@ -27,10 +27,11 @@ export const useScaffoldContract = <
   chainId?: AllowedChainIds;
 }) => {
   const selectedNetwork = useSelectedNetwork(chainId);
-  const { data: deployedContractData, isLoading: deployedContractLoading } = useDeployedContractInfo({
-    contractName,
-    chainId: selectedNetwork?.id as AllowedChainIds,
-  });
+  const { data: deployedContractData, isLoading: deployedContractLoading } =
+    useDeployedContractInfo({
+      contractName,
+      chainId: selectedNetwork?.id as AllowedChainIds,
+    });
 
   const publicClient = usePublicClient({ chainId: selectedNetwork?.id });
 

@@ -26,7 +26,13 @@ const publicClient = createPublicClient({
 });
 
 export const ContractTabs = ({ address, contractData }: PageProps) => {
-  const { blocks, transactionReceipts, currentPage, hasNextPage, setCurrentPage } = useFetchBlocks(address);
+  const {
+    blocks,
+    transactionReceipts,
+    currentPage,
+    hasNextPage,
+    setCurrentPage,
+  } = useFetchBlocks(address);
   const [activeTab, setActiveTab] = useState("transactions");
   const [isContract, setIsContract] = useState(false);
 
@@ -75,12 +81,22 @@ export const ContractTabs = ({ address, contractData }: PageProps) => {
       )}
       {activeTab === "transactions" && (
         <div className="pt-4">
-          <TransactionsTable blocks={blocks} transactionReceipts={transactionReceipts} />
-          <PaginationButton currentPage={currentPage} hasNextPage={hasNextPage} setCurrentPage={setCurrentPage} />
+          <TransactionsTable
+            blocks={blocks}
+            transactionReceipts={transactionReceipts}
+          />
+          <PaginationButton
+            currentPage={currentPage}
+            hasNextPage={hasNextPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       )}
       {activeTab === "code" && contractData && (
-        <AddressCodeTab bytecode={contractData.bytecode} assembly={contractData.assembly} />
+        <AddressCodeTab
+          bytecode={contractData.bytecode}
+          assembly={contractData.assembly}
+        />
       )}
       {activeTab === "storage" && <AddressStorageTab address={address} />}
       {activeTab === "logs" && <AddressLogsTab address={address} />}
