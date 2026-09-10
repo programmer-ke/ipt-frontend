@@ -18,8 +18,19 @@ const Home: NextPage = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const { data: ethBalance } = useBalance({ address: connectedAddress, chainId: 11155111 });
 
+  // Redeem state
+  const [redeemAmount, setRedeemAmount] = useState("");
+
   // Vault contract on Sepolia
   const isOnSepolia = chainId === 11155111;
+
+  // Read user's RebaseToken balance on Sepolia
+  const { data: tokenBalance } = useScaffoldReadContract({
+    contractName: "RebaseToken",
+    functionName: "balanceOf",
+    args: [connectedAddress],
+    chainId: 11155111,
+  });
 
   // Write contract for deposit
   const { writeContractAsync, data: hash, isPending, error } = useScaffoldWriteContract({
@@ -28,11 +39,42 @@ const Home: NextPage = () => {
   });
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash });
 
+  // Separate write hook for redeem (keeps deposit/redeem states independent)
+  const {
+    writeContractAsync: writeRedeemAsync,
+    data: redeemHash,
+    isPending: isRedeemPending,
+    error: redeemError,
+  } = useScaffoldWriteContract({
+    contractName: "Vault",
+    chainId: 11155111,
+  });
+
+  const {
+    isLoading: isRedeemConfirming,
+    isSuccess: isRedeemConfirmed,
+  } = useWaitForTransactionReceipt({ hash: redeemHash });
+
   const handleDeposit = () => {
     if (!depositAmount) return;
     writeContractAsync({
       functionName: "deposit",
       value: parseEther(depositAmount),
+    });
+  };
+
+  const handleRedeem = () => {
+    if (!redeemAmount) return;
+    writeRedeemAsync({
+      functionName: "redeem",
+      args: [parseEther(redeemAmount)],
+    });
+  };
+
+  const handleRedeemMax = () => {
+    writeRedeemAsync({
+      functionName: "redeem",
+      args: [BigInt("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")], // type(uint256).max
     });
   };
 
@@ -48,6 +90,23 @@ const Home: NextPage = () => {
             <p className="my-2 font-medium">Connected Address:</p>
             <Address address={connectedAddress} chain={targetNetwork} />
           </div>
+
+          {/* Token Info on all networks */}
+          {connectedAddress && (
+            <div className="mt-8 w-full max-w-2xl">
+              <h2 className="text-xl font-semibold mb-4">Your Token Info</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {targetNetworks.map(network => (
+                  <NetworkTokenInfo
+                    key={network.id}
+                    chainId={network.id}
+                    chainName={network.name}
+                    userAddress={connectedAddress}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Deposit Section (only on Sepolia) */}
           {connectedAddress && isOnSepolia && (
@@ -80,19 +139,40 @@ const Home: NextPage = () => {
             </div>
           )}
 
-          {/* Token Info on all networks */}
-          {connectedAddress && (
-            <div className="mt-8 w-full max-w-2xl">
-              <h2 className="text-xl font-semibold mb-4">Your Token Info</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {targetNetworks.map(network => (
-                  <NetworkTokenInfo
-                    key={network.id}
-                    chainId={network.id}
-                    chainName={network.name}
-                    userAddress={connectedAddress}
+          {/* Redeem Section (only on Sepolia) */}
+          {connectedAddress && isOnSepolia && (
+            <div className="mt-6 w-full max-w-2xl">
+              <h2 className="text-xl font-semibold mb-4">Redeem Rebase Tokens for ETH</h2>
+              <div className="card bg-base-200 shadow-xl p-4">
+                <p className="mb-2">
+                  Your Token Balance: {tokenBalance ? formatEther(tokenBalance as bigint) : "0"} IPT
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    placeholder="Amount in IPT"
+                    className="input input-bordered w-full"
+                    value={redeemAmount}
+                    onChange={e => setRedeemAmount(e.target.value)}
+                    disabled={isRedeemPending || isRedeemConfirming}
                   />
-                ))}
+                  <button
+                    className="btn btn-outline btn-sm"
+                    onClick={handleRedeemMax}
+                    disabled={isRedeemPending || isRedeemConfirming}
+                  >
+                    MAX
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleRedeem}
+                    disabled={!redeemAmount || isRedeemPending || isRedeemConfirming}
+                  >
+                    {isRedeemPending ? "Confirming..." : isRedeemConfirming ? "Waiting..." : "Redeem"}
+                  </button>
+                </div>
+                {isRedeemConfirmed && <p className="text-success mt-2">Redeem successful!</p>}
+                {redeemError && <p className="text-error mt-2">Error: {redeemError.message}</p>}
               </div>
             </div>
           )}
