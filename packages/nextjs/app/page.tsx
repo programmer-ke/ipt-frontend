@@ -2,16 +2,39 @@
 
 import { Address } from "@scaffold-ui/components";
 import type { NextPage } from "next";
-import { formatEther } from "viem";
-import { useAccount, useReadContract } from "wagmi";
+import { useState } from "react";
+import { formatEther, parseEther } from "viem";
+import { useAccount, useBalance, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import externalContracts from "~~/contracts/externalContracts";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth";
 import { getTargetNetworks } from "~~/utils/scaffold-eth/networks";
 
 const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+  const { address: connectedAddress, chainId } = useAccount();
   const { targetNetwork } = useTargetNetwork();
   const targetNetworks = getTargetNetworks();
+
+  // Deposit state
+  const [depositAmount, setDepositAmount] = useState("");
+  const { data: ethBalance } = useBalance({ address: connectedAddress, chainId: 11155111 });
+
+  // Vault contract on Sepolia
+  const vaultContract = externalContracts[11155111]?.Vault;
+  const isOnSepolia = chainId === 11155111;
+
+  // Write contract for deposit
+  const { writeContract, data: hash, isPending, error } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash });
+
+  const handleDeposit = () => {
+    if (!depositAmount || !vaultContract) return;
+    writeContract({
+      address: vaultContract.address as `0x${string}`,
+      abi: vaultContract.abi,
+      functionName: "deposit",
+      value: parseEther(depositAmount),
+    });
+  };
 
   return (
     <>
@@ -26,6 +49,38 @@ const Home: NextPage = () => {
             <Address address={connectedAddress} chain={targetNetwork} />
           </div>
 
+          {/* Deposit Section (only on Sepolia) */}
+          {connectedAddress && isOnSepolia && vaultContract && (
+            <div className="mt-8 w-full max-w-2xl">
+              <h2 className="text-xl font-semibold mb-4">Deposit ETH to Mint Rebase Tokens</h2>
+              <div className="card bg-base-200 shadow-xl p-4">
+                <p className="mb-2">
+                  Your ETH Balance: {ethBalance ? formatEther(ethBalance.value) : "0"} ETH
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    placeholder="Amount in ETH"
+                    className="input input-bordered w-full"
+                    value={depositAmount}
+                    onChange={e => setDepositAmount(e.target.value)}
+                    disabled={isPending || isConfirming}
+                  />
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleDeposit}
+                    disabled={!depositAmount || isPending || isConfirming}
+                  >
+                    {isPending ? "Confirming..." : isConfirming ? "Waiting..." : "Deposit"}
+                  </button>
+                </div>
+                {isConfirmed && <p className="text-success mt-2">Deposit successful!</p>}
+                {error && <p className="text-error mt-2">Error: {error.message}</p>}
+              </div>
+            </div>
+          )}
+
+          {/* Token Info on all networks */}
           {connectedAddress && (
             <div className="mt-8 w-full max-w-2xl">
               <h2 className="text-xl font-semibold mb-4">Your Token Info</h2>
