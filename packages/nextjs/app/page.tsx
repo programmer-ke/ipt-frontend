@@ -235,7 +235,7 @@ const Home: NextPage = () => {
 
     const message = {
       receiver: encodedReceiver,
-      data: "0x",
+      data: "0x" as `0x${string}`,
       tokenAmounts: [
         {
           token: tokenAddr,
@@ -243,7 +243,7 @@ const Home: NextPage = () => {
         },
       ],
       feeToken: LINK_TOKEN_ADDRESS,
-      extraArgs: "0x",
+      extraArgs: "0x" as `0x${string}`,
     };
 
     ccipSend({
@@ -259,7 +259,7 @@ const Home: NextPage = () => {
       <div className="flex items-center flex-col grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
+            <span className="block text-2xl mb-2">Demo of</span>
             <span className="block text-4xl font-bold">
               {" "}
               The interplanetary token{" "}
